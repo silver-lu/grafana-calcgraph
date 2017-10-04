@@ -1,5 +1,6 @@
 module.exports = (grunt) => {
   require('load-grunt-tasks')(grunt);
+  grunt.loadTasks('tasks');
   grunt.loadNpmTasks("grunt-ts");
   grunt.loadNpmTasks('grunt-execute');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -15,6 +16,12 @@ module.exports = (grunt) => {
     clean: ['dist'],
 
     copy: {
+      src_to_gen: {
+        cwd: 'src',
+        expand: true,
+        src: ['**/*.js'],
+        dest: 'gen'
+      },
       src_to_dist: {
         cwd: 'src',
         expand: true,
@@ -62,7 +69,7 @@ module.exports = (grunt) => {
       },
       dist: {
         files: [{
-          cwd: 'src',
+          cwd: 'gen',
           expand: true,
           src: ['*.js'],
           dest: 'dist/calcgraph',
@@ -73,6 +80,6 @@ module.exports = (grunt) => {
 
   });
 
-  grunt.registerTask('default', ['clean', 'copy:pluginDef', 'copy:tpl_to_dist', 'copy:img_to_dist', 'babel']);
+  grunt.registerTask('default', ['clean', 'copy:pluginDef', 'copy:tpl_to_dist', 'copy:img_to_dist', 'systemjs:build', 'babel']);
 };
 
