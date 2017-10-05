@@ -82,7 +82,7 @@ const panelDefaults = {
     // staircase line mode
     steppedLine: false,
     // tooltip options
-    tooltip       : {
+    tooltip : {
       value_type: 'individual',
       shared: true,
       sort: 0,
@@ -98,41 +98,43 @@ const panelDefaults = {
     seriesOverrides: [],
     thresholds: [],
   };
-
-class GraphCtrl extends MetricsPanelCtrl {
-
+class CalcGraphCtrl extends MetricsPanelCtrl {
+//class GraphCtrl extends PanelCtrl {
 
   /** @ngInject */
   constructor($scope, $injector, annotationsSrv) {
     super($scope, $injector);
-
     this.template = template;
-
+    this.annotationsSrv = annotationsSrv
+console.log("in constructo");
     this.hiddenSeries = {};
     this.seriesList = [];
     this.dataList = [];
     this.annotations = [];
     this.colors = [];
 
-    _.defaults(this.panel, this.panelDefaults);
-    _.defaults(this.panel.tooltip, this.panelDefaults.tooltip);
-    _.defaults(this.panel.legend, this.panelDefaults.legend);
-    _.defaults(this.panel.xaxis, this.panelDefaults.xaxis);
+console.log("init vars");
+    _.defaults(this.panel, panelDefaults);
+    _.defaults(this.panel.tooltip, panelDefaults.tooltip);
+    _.defaults(this.panel.legend, panelDefaults.legend);
+    _.defaults(this.panel.xaxis, panelDefaults.xaxis);
+console.log("set default");
 
     this.processor = new DataProcessor(this.panel);
-
+console.log("set processor");
     this.events.on('render', this.onRender.bind(this));
     this.events.on('data-received', this.onDataReceived.bind(this));
     this.events.on('data-error', this.onDataError.bind(this));
     this.events.on('data-snapshot-load', this.onDataSnapshotLoad.bind(this));
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('init-panel-actions', this.onInitPanelActions.bind(this));
+    console.log("finished constructor");
   }
 
   onInitEditMode() {
     this.addEditorTab('Axes', axesEditorComponent, 2);
-    this.addEditorTab('Legend', 'public/app/plugins/panel/graph/tab_legend.html', 3);
-    this.addEditorTab('Display', 'public/app/plugins/panel/graph/tab_display.html', 4);
+    this.addEditorTab('Legend', 'public/plugins/calcgraph/tpl/tab_legend.html', 3);
+    this.addEditorTab('Display', 'public/plugins/calcgraph/tpl/tab_display.html', 4);
 
     if (config.alertingEnabled) {
       this.addEditorTab('Alert', alertTab, 5);
@@ -317,4 +319,6 @@ class GraphCtrl extends MetricsPanelCtrl {
   }
 }
 
-export {GraphCtrl, GraphCtrl as PanelCtrl};
+export {CalcGraphCtrl, CalcGraphCtrl as PanelCtrl};
+
+CalcGraphCtrl.template = template;

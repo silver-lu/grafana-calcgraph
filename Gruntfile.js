@@ -16,12 +16,6 @@ module.exports = (grunt) => {
     clean: ['dist'],
 
     copy: {
-      src_to_gen: {
-        cwd: 'src',
-        expand: true,
-        src: ['**/*.js'],
-        dest: 'gen'
-      },
       src_to_dist: {
         cwd: 'src',
         expand: true,
@@ -69,7 +63,7 @@ module.exports = (grunt) => {
       },
       dist: {
         files: [{
-          cwd: 'gen',
+          cwd: 'src',
           expand: true,
           src: ['*.js'],
           dest: 'dist/calcgraph',
@@ -80,6 +74,6 @@ module.exports = (grunt) => {
 
   });
 
-  grunt.registerTask('default', ['clean', 'copy:pluginDef', 'copy:tpl_to_dist', 'copy:img_to_dist', 'systemjs:build', 'babel']);
+  grunt.registerTask('default', ['clean', 'copy:pluginDef', 'copy:tpl_to_dist', 'copy:img_to_dist', 'babel',  'systemjs:build']);
 };
 

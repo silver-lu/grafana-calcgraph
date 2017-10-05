@@ -76,7 +76,7 @@ export function axesEditorComponent() {
   return {
     restrict: 'E',
     scope: true,
-    templateUrl: 'public/app/plugins/panel/graph/axes_editor.html',
+    templateUrl: 'public/plugins/calcgraph/tpl/axes_editor.html',
     controller: AxesEditorCtrl,
   };
 }

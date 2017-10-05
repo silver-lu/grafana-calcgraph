@@ -1,11 +1,11 @@
 {
   "type": "panel",
-  "name": "Graph",
-  "id": "graph",
+  "name": "CalcGraph",
+  "id": "calcgraph",
 
   "info": {
     "author": {
-      "name": "Grafana Project",
+      "name": "Silver Lu",
       "url": "https://grafana.com"
 },
     "logos": {

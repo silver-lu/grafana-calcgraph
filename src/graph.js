@@ -8,7 +8,7 @@ import 'jquery.flot.stackpercent';
 import 'jquery.flot.fillbelow';
 import 'jquery.flot.crosshair';
 import 'jquery.flot.dashes';
-import './jquery.flot.events';
+import './jquery_flot_events';
 
 import $ from 'jquery';
 import _ from 'lodash';
